@@ -743,6 +743,10 @@ class CourseInstance(CourseInstanceProto, models.Model):
         default=False,
         help_text=_('COURSE_INSTANCE_SIS_ENROLL_HELP')
     )
+    points_goal_enabled = models.BooleanField(
+        verbose_name=_('LABEL_POINTS_GOAL_ENABLED'),
+        default=True,
+    )
 
     # usertags from course.models.UserTag
     # taggings from course.models.UserTagging
