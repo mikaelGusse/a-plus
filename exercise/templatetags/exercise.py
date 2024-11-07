@@ -195,7 +195,6 @@ def _points_data(
         points = obj.official_points
     else:
         points = obj.points
-
     max_points = getattr(obj, 'max_points',  0)
     required = getattr(obj, 'points_to_pass',  0)
     module_goal_points = getattr(obj, 'module_goal_points', None)
@@ -265,9 +264,11 @@ def _points_data(
 
 @register.inclusion_tag("exercise/_points_progress.html")
 def points_progress(
-        obj: Union[CachedPointsData, ModulePoints, CategoryPoints],
+        obj: Union[CachedPointsData, ModulePoints, CategoryPoints], points_goal_enabled: Optional[bool] = None,
         ) -> Dict[str, Any]:
-    return _points_data(obj, None)
+    points_data = _points_data(obj, None)
+    points_data['points_goal_enabled'] = points_goal_enabled
+    return points_data
 
 
 @register.inclusion_tag("exercise/_points_badge.html")
